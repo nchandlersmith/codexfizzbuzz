@@ -1,7 +1,12 @@
 package org.example
 
 fun fizzbuzz(n: Int): String {
-    val fizz = if (n % 3 == 0) "Fizz" else ""
-    val buzz = if (n % 5 == 0) "Buzz" else ""
-    return if (fizz.isNotEmpty() || buzz.isNotEmpty()) fizz + buzz else n.toString()
+    val rules = listOf(
+        { value: Int -> value % 3 == 0 && value % 5 == 0 } to { _: Int -> "FizzBuzz" },
+        { value: Int -> value % 3 == 0 } to { _: Int -> "Fizz" },
+        { value: Int -> value % 5 == 0 } to { _: Int -> "Buzz" }
+    )
+
+    val rule = rules.firstOrNull { (check, _) -> check(n) }
+    return rule?.second?.invoke(n) ?: n.toString()
 }
