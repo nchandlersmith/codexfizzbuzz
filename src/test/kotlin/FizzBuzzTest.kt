@@ -32,5 +32,13 @@ class FizzBuzzTest : StringSpec({
             fizzbuzz(n).shouldBe("Buzz")
         }
     }
+
+    "fizzbuzz should return 'FizzBuzz' for integers divisible by both 3 and 5" {
+        checkAll(
+            Arb.int().filter { n -> n % 3 == 0 && n % 5 == 0 }
+        ) { n ->
+            fizzbuzz(n).shouldBe("FizzBuzz")
+        }
+    }
 })
 
