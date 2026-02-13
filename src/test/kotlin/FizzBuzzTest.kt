@@ -41,11 +41,35 @@ class FizzBuzzTest : StringSpec({
         }
     }
 
-    "fizzbuzz should return 'Fozz' for multiples of 7" {
+    "fizzbuzz should return 'Fozz' for multiples of 7 but not 3 or 5" {
         checkAll(
-            Arb.int().filter { n -> n % 7 == 0 }
+            Arb.int().filter { n -> n % 7 == 0 && n % 3 != 0 && n % 5 != 0 }
         ) { n ->
             fizzbuzz(n).shouldBe("Fozz")
+        }
+    }
+
+    "fizzbuzz should return 'FizzFozz' for integers divisible by both 3 and 7 but not 5" {
+        checkAll(
+            Arb.int().filter { n -> n % 3 == 0 && n % 7 == 0 && n % 5 != 0 }
+        ) { n ->
+            fizzbuzz(n).shouldBe("FizzFozz")
+        }
+    }
+
+    "fizzbuzz should return 'BuzzFozz' for integers divisible by both 5 and 7 but not 3" {
+        checkAll(
+            Arb.int().filter { n -> n % 5 == 0 && n % 7 == 0 && n % 3 != 0 }
+        ) { n ->
+            fizzbuzz(n).shouldBe("BuzzFozz")
+        }
+    }
+
+    "fizzbuzz should return 'FizzBuzzFozz' for integers divisible by 3, 5, and 7" {
+        checkAll(
+            Arb.int().filter { n -> n % 3 == 0 && n % 5 == 0 && n % 7 == 0 }
+        ) { n ->
+            fizzbuzz(n).shouldBe("FizzBuzzFozz")
         }
     }
 })
