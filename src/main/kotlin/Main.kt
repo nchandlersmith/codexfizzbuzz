@@ -1,13 +1,9 @@
 package org.example
 
 fun fizzbuzz(n: Int): String {
-    val rules = listOf<Pair<(Int) -> Boolean, (Int) -> String>>(
-        { value: Int -> value % 7 == 0 } to { _: Int -> "Fozz" },
-        { value: Int -> value % 3 == 0 && value % 5 == 0 } to { _: Int -> "FizzBuzz" },
-        { value: Int -> value % 3 == 0 } to { _: Int -> "Fizz" },
-        { value: Int -> value % 5 == 0 } to { _: Int -> "Buzz" }
-    )
-
-    val rule = rules.firstOrNull { (check, _) -> check(n) }
-    return rule?.second?.invoke(n) ?: n.toString()
+    val fizz = if (n % 3 == 0) "Fizz" else ""
+    val buzz = if (n % 5 == 0) "Buzz" else ""
+    val fozz = if (n % 7 == 0) "Fozz" else ""
+    val result = fizz + buzz + fozz
+    return if (result.isNotEmpty()) result else n.toString()
 }
