@@ -11,7 +11,7 @@ class FizzBuzzTest : StringSpec({
 
     "fizzbuzz should return the number as string for integers not divisible by 3 or 5" {
         checkAll(
-            Arb.int().filter { n -> n % 3 != 0 && n % 5 != 0 }
+            Arb.int().filter { n -> n % 3 != 0 && n % 5 != 0 && n % 7 != 0 }
         ) { n ->
             fizzbuzz(n).shouldBe(n.toString())
         }
@@ -19,7 +19,7 @@ class FizzBuzzTest : StringSpec({
 
     "fizzbuzz should return 'Fizz' for integers divisible by 3 but not 5" {
         checkAll(
-            Arb.int().filter { n -> n % 3 == 0 && n % 5 != 0 }
+            Arb.int().filter { n -> n % 3 == 0 && n % 5 != 0 && n % 7 != 0 }
         ) { n ->
             fizzbuzz(n).shouldBe("Fizz")
         }
@@ -27,7 +27,7 @@ class FizzBuzzTest : StringSpec({
 
     "fizzbuzz should return 'Buzz' for integers divisible by 5 but not 3" {
         checkAll(
-            Arb.int().filter { n -> n % 5 == 0 && n % 3 != 0 }
+            Arb.int().filter { n -> n % 5 == 0 && n % 3 != 0 && n % 7 != 0 }
         ) { n ->
             fizzbuzz(n).shouldBe("Buzz")
         }
@@ -35,10 +35,17 @@ class FizzBuzzTest : StringSpec({
 
     "fizzbuzz should return 'FizzBuzz' for integers divisible by both 3 and 5" {
         checkAll(
-            Arb.int().filter { n -> n % 3 == 0 && n % 5 == 0 }
+            Arb.int().filter { n -> n % 3 == 0 && n % 5 == 0 && n % 7 != 0 }
         ) { n ->
             fizzbuzz(n).shouldBe("FizzBuzz")
         }
     }
-})
 
+    "fizzbuzz should return 'Fozz' for multiples of 7" {
+        checkAll(
+            Arb.int().filter { n -> n % 7 == 0 }
+        ) { n ->
+            fizzbuzz(n).shouldBe("Fozz")
+        }
+    }
+})
