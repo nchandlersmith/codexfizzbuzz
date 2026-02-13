@@ -1,7 +1,7 @@
 package org.example
 
 fun fizzbuzz(n: Int): String {
-    return "1"
+    return n.toString()
 }
 
 fun main() {
