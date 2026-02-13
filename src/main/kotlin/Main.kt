@@ -7,6 +7,3 @@ fun fizzbuzz(n: Int): String {
         else -> n.toString()
     }
 }
-
-fun main() {
-}
